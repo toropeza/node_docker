@@ -1,68 +1,51 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# DevOps Practitioner Training
+## Deploy Angular Application in Docker Container
 
-## Available Scripts
+#### Requirements
+- Document the step-by-step process from the initial installation to the final production
+- Run the Angular application successfully in the Docker container
+- Use Docker Compose to manage the Angular application running inside the Docker container
 
-In the project directory, you can run:
+#### Step-by-Step process
 
-### `npm start`
+1. Created Repository for Image configuration on Github
+    https://github.com/toropeza/node_docker.git 
+2. Create the Dockerfile for the Jenkins Image. The Dockerfile uses the Ubuntu as its base
+3. Add node installation lines to Dockerfile
+4. Add entrypoint for Node application on Docker image 
+5. Adding line in Dockerfile to copy project files over and set the container working directory to it
+6. Created the docker-compose file and defined a service with an exposed port. Exposing the application in the container and building the image
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+#### Advantages of Containerizing
+Dockerizing an Application and Deploying it as a container has many diferent benefits. 
 
-### `npm test`
+##### Application Environment is always the same
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Environments can be a pain to set up since there is always a concern of which packages are installed in the system. 
+By using Docker, the environment that your application will run on in already configured in the containerized environment.
 
-### `npm run build`
+##### Can be deployed anywhere
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Where Docker can the run the application can run as well. This is because the operating system is abstracted away from the application
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+##### Scalability
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Docker is much more scalable because it can be integrated with other tools such as Kubernetes which has many helpful features including failure recovery and rolling updates for zero downtime deployments
 
-### `npm run eject`
+##### Configuration Management
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+The application's configuration and environment is treated as code when defined in Dockerfiles and images. 
+This is an advantage because releasing changes to the application's environment and configuration can be released in its own pipeline which gives you the opportunity to run tests against it.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### Disadvantages of Container
+The biggest disadvantages to containerizing an application have to do with process.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+##### Time
+It could take a significant amount of time to containerize your application depending on its size and complexity. Which makes it a significant investment and potential risk for a company
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+##### Mindset
+Thinking in terms of a container for an application requires a change in mindset for certain companies because they need to start to build their applications differently. They need to start thinking with failure in mind as well as thinking about how their applications can recover.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+##### Automation
+Containerizing an application not only requires configuring the environment for the application to run, but it also requires an investment in automation since pipelines should be created in order for the release of images and changes to them. This is an important piece of work since it 
